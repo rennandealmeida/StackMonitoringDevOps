@@ -10,7 +10,7 @@ Monitoramento com Netdata, Prometheus e Grafana. (ambiente preparado com docker 
 
 2-passo:
    -entre na pasta;
-    cd StackMonitoringDevOps
+    cd StackMonitoringDevOps/monitoring
 
 3-passo:
     - execute o comando:
