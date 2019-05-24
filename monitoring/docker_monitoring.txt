@@ -1,0 +1,6 @@
+Comandos docker (para caso prefira executar algo isolado)
+
+docker network create --driver bridge monitoring
+docker run -it --name netdata --hostname netdata --network=monitoring -p 19999:19999  netdata/netdata
+docker run -d -p 9090:9090 --name prometheus --hostname prometheus --network=monitoring -v /opt/prometheus:/etc/prometheus prom/prometheus
+docker run -i -p 3000:3000 --network=monitoring --name grafana -d grafana/grafana
