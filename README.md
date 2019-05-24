@@ -6,6 +6,7 @@ Monitoramento com Netdata, Prometheus e Grafana. (ambiente preparado com docker 
 
 1-passo:
    -clone a pasta do projeto para seu ambiente;
+     git clone https://github.com/rennandealmeida/StackMonitoringDevOps.git
 
 2-passo:
    -entre na pasta;
