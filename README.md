@@ -4,19 +4,19 @@ Antes de prosseguir com os passos certifique-se de que possui o 'docker' e 'dock
 
 Monitoramento com Netdata, Prometheus e Grafana. (ambiente preparado com docker compose)
 
-#####1-passo:  
+####1-passo:  
 clone a pasta do projeto para seu ambiente:  
 git clone https://github.com/rennandealmeida/StackMonitoringDevOps.git
 
-#####2-passo:  
+####2-passo:  
 entre na pasta:  
 cd StackMonitoringDevOps/monitoring
 
-#####3-passo:
+####3-passo:
 execute o comando:  
 docker-compose up  
 
-####Pronto!  
+###Pronto!  
 agora para acessar o netdata,prometheus e grafana via browser acesse:  
 netdata:
 http://localhost:19999  
