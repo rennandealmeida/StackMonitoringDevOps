@@ -1,6 +1,24 @@
 Comandos docker (para caso prefira executar algo isolado)
 
-docker network create --driver bridge monitoring
-docker run -it --name netdata --hostname netdata --network=monitoring -p 19999:19999  netdata/netdata
-docker run -d -p 9090:9090 --name prometheus --hostname prometheus --network=monitoring -v /opt/prometheus:/etc/prometheus prom/prometheus
-docker run -i -p 3000:3000 --network=monitoring --name grafana -d grafana/grafana
+#docker network create --driver bridge monitoring
+
+#docker run -it --name netdata --hostname netdata --network=monitoring -p 19999:19999  netdata/netdata
+docker run -d --name=netdata --hostname=netdata -p 19999:19999 -v /proc:/host/proc:ro -v /sys:/host/sys:ro -v /var/run/docker.sock:/var/run/docker.sock:ro --cap-add SYS_PTRACE --security-opt apparmor=unconfined netdata/netdata
+
+sudo docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --hostname=cadvisor \
+  google/cadvisor:latest
+
+#docker run -d -p 9090:9090 --name prometheus --hostname prometheus --network=monitoring -v /opt/prometheus:/etc/prometheus prom/prometheus
+sudo docker run -d -p 9090:9090 --name prometheus --link netdata:netdata --link cadvisor:cadvisor --hostname prometheus -v /opt/prometheus:/etc/prometheus prom/prometheus
+
+#docker run -i -p 3000:3000 --network=monitoring --name grafana -d grafana/grafana
+docker run -i -p 3000:3000 --name grafana -d grafana/grafana
