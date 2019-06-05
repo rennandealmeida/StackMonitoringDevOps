@@ -31,6 +31,17 @@ services:
     ports:
       - "3000:3000"
 
+  cadvisor:
+    image: google/cadvisor
+    hostname: cadvisor
+    ports:
+      - 9200:8080
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:rw"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"      
+
 networks:
   monitoring:
     driver: bridge
